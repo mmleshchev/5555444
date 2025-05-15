@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Подача заявки{% endblock %}
+
+{% block content %}
+  <h5>Заполните форму</h5>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Отправить</button>
+  </form>
+{% endblock %}

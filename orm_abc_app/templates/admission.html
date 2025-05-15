@@ -1,0 +1,20 @@
+<!-- orm_abc_app/templates/admission.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Подача заявки</title>
+</head>
+<body>
+  <header>
+    <h1>Подача заявки</h1>
+  </header>
+  <main>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Отправить</button>
+    </form>
+  </main>
+</body>
+</html>

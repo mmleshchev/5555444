@@ -1,0 +1,19 @@
+{# orm_abc_app/templates/abc_model_form.html #}
+{% extends 'layout.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Модельная форма: X и Y{% endblock %}
+
+{% block content %}
+  <h5>Модельная форма (расчёт Z)</h5>
+  <form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.x|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+      {{ form.y|add_class:"form-control" }}
+    </div>
+    <button type="submit" class="btn btn-success">Рассчитать</button>
+  </form>
+{% endblock %}

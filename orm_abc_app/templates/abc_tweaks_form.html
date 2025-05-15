@@ -1,0 +1,23 @@
+{# orm_abc_app/templates/abc_tweaks_form.html #}
+{% extends 'layout.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Улучшенная форма: X и Y{% endblock %}
+
+{% block content %}
+  <h5>Улучшенная форма</h5>
+  <form method="post" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+      <label for="{{ form.x.id_for_label }}" class="form-label">Введите X</label>
+      {{ form.x|attr:"placeholder:0.0"|add_class:"form-control" }}
+    </div>
+    <div class="col-md-6">
+      <label for="{{ form.y.id_for_label }}" class="form-label">Введите Y</label>
+      {{ form.y|attr:"placeholder:0.0"|add_class:"form-control" }}
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Вычислить Z</button>
+    </div>
+  </form>
+{% endblock %}

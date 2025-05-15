@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}Таблица{% endblock %}
+
+{% block content %}
+  <h5>Фильтрация по году поступления</h5>
+  <form method="get" class="row g-3 mb-4">
+    <div class="col-auto">
+      <input type="number" name="admission_year"
+             class="form-control"
+             placeholder="Год"
+             value="{{ request.GET.admission_year }}">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-secondary">Применить</button>
+      <a href="{% url 'orm_abc_app:table' %}" class="btn btn-link">Сброс</a>
+    </div>
+  </form>
+
+  <h5>Данные</h5>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <a href="?sort_by=full_name&order={{ next_order }}{% if request.GET.admission_year %}&admission_year={{ request.GET.admission_year }}{% endif %}">
+            ФИО
+            {% if current_sort == 'full_name' %}
+              {% if current_order == 'asc' %}↑{% else %}↓{% endif %}
+            {% endif %}
+          </a>
+        </th>
+        <th>
+          <a href="?sort_by=admission_year&order={{ next_order }}{% if request.GET.admission_year %}&admission_year={{ request.GET.admission_year }}{% endif %}">
+            Год
+            {% if current_sort == 'admission_year' %}
+              {% if current_order == 'asc' %}↑{% else %}↓{% endif %}
+            {% endif %}
+          </a>
+        </th>
+        <th>
+          <a href="?sort_by=program_name&order={{ next_order }}{% if request.GET.admission_year %}&admission_year={{ request.GET.admission_year }}{% endif %}">
+            ОП
+            {% if current_sort == 'program_name' %}
+              {% if current_order == 'asc' %}↑{% else %}↓{% endif %}
+            {% endif %}
+          </a>
+        </th>
+        <th>
+          <a href="?sort_by=date_submitted&order={{ next_order }}{% if request.GET.admission_year %}&admission_year={{ request.GET.admission_year }}{% endif %}">
+            Дата
+            {% if current_sort == 'date_submitted' %}
+              {% if current_order == 'asc' %}↑{% else %}↓{% endif %}
+            {% endif %}
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in objects %}
+      <tr>
+        <td>{{ a.full_name }}</td>
+        <td>{{ a.admission_year }}</td>
+        <td>{{ a.program_name }}</td>
+        <td>{{ a.date_submitted }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">Ничего не найдено</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h5 class="mt-5">Статистика по году поступления</h5>
+  <ul class="list-group">
+    {% for s in stats %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ s.admission_year }}
+        <span class="badge bg-primary rounded-pill">{{ s.count }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Результаты{% endblock %}
+
+{% block content %}
+  <h5>Все заявки</h5>
+  <ul class="list-group">
+    {% for a in submissions %}
+      <li class="list-group-item">
+        {{ a.full_name }} — {{ a.admission_year }} — {{ a.program_name }}
+        <span class="text-muted float-end">{{ a.date_submitted }}</span>
+      </li>
+    {% empty %}
+      <li class="list-group-item">Ни одной заявки не найдено.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
